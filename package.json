@@ -1,0 +1,84 @@
+{
+  "name": "tsoa-starter",
+  "version": "1.0.0",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run tsoa && tsc -p src",
+    "build:watch": "run-when-changed --watch \"./src/**/!(routes.ts)\" --exec \"npm run build\" -d 2000 -i 2000",
+    "dev": "npm run clean && npm run build && concurrently --kill-others \"npm run build:watch\" \"DEPLOYMENT=DEVELOPMENT nodemon --inspect dist/index.js --watch dist\"",
+    "start": "node dist/index.js",
+    "test": "jest --config package.json",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "coverage": "npm run test -- --coverage",
+    "tsoa": "tsoa swagger && tsoa routes"
+  },
+  "dependencies": {
+    "api-error-handler": "^1.0.0",
+    "body-parser": "~1.13.2",
+    "concurrently": "^3.5.0",
+    "cookie-parser": "~1.3.5",
+    "cors": "^2.8.4",
+    "debug": "~2.2.0",
+    "express": "^4.16.3",
+    "express-ping": "^1.4.0",
+    "glob": "^5.0.14",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.17.4",
+    "source-map-support": "^0.5.6",
+    "tsoa": "^2.1.8",
+    "typescript": "^2.8.3",
+    "uuid": "^3.2.1",
+    "verror": "^1.10.0",
+    "winston": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/api-error-handler": "^1.0.31",
+    "@types/cookie-parser": "^1.4.1",
+    "@types/cors": "^2.8.4",
+    "@types/express": "^4.0.36",
+    "@types/glob": "^5.0.35",
+    "@types/jest": "^23.3.0",
+    "@types/lodash": "^4.14.110",
+    "@types/morgan": "^1.7.35",
+    "@types/node": "^8.0.9",
+    "@types/uuid": "^3.4.3",
+    "@types/verror": "^1.10.3",
+    "jest": "^23.4.1",
+    "jest-express": "^1.6.0",
+    "rimraf": "^2.6.2",
+    "run-when-changed": "^2.1.0",
+    "ts-jest": "^23.0.1",
+    "tslint": "^5.10.0"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "collectCoverageFrom": [
+      "**/*.{ts,tsx}",
+      "!dist/**/*",
+      "!**/*.d.ts",
+      "!src/routes.ts"
+    ],
+    "setupFiles": [
+      "./jest.config.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 75,
+        "functions": 75,
+        "lines": 75,
+        "statements": 75
+      }
+    }
+  }
+}

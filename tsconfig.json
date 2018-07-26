@@ -1,0 +1,21 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "baseUrl": ".",
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "es2017",
+        "lib": [
+            "es2017",
+            "dom"
+        ],
+        "outDir": "./dist",
+        "module": "commonjs",
+        "paths": {
+            "*": ["types/*"]
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "swagger": {
+        "outputDirectory": "./dist",
+        "entryFile": "./src/index.ts",
+        "host": "",
+        "basePath": "/v1",
+        "specMerging": "recursive",
+        "spec": {
+        },
+        "securityDefinitions": {}
+    },
+    "routes": {
+        "basePath": "/v1",
+        "entryFile": "./src/index.ts",
+        "authenticationModule": "./src/authentication/authentication.ts",
+        "routesDir": "./src"
+    }
+}
