@@ -3,5 +3,11 @@
     "compilerOptions": {
         "outDir": "../dist",
         "baseUrl": ""
-    }
+    },
+    "include": [
+        "./**/*"
+    ],
+    "exclude": [
+      "./**/*.spec.ts"
+    ]
 }
