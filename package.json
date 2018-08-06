@@ -79,6 +79,12 @@
         "lines": 75,
         "statements": 75
       }
+    },
+    "globals": {
+      "ts-jest": {
+        "ignoreCoverageForDecorators": true,
+        "ignoreCoverageForAllDecorators": true
+      }
     }
   }
 }
