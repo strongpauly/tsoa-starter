@@ -5,31 +5,33 @@
     "clean": "rimraf dist",
     "build": "npm run tsoa && tsc -p src",
     "build:watch": "run-when-changed --watch \"./src/**/!(routes.ts)\" --exec \"npm run build\" -d 2000 -i 2000",
-    "dev": "npm run clean && npm run build && concurrently --kill-others \"npm run build:watch\" \"DEPLOYMENT=DEVELOPMENT nodemon --inspect dist/index.js --watch dist\"",
+    "predev": "npm run tsoa",
+    "dev": "concurrently --kill-others \"npm run tsoa:watch\" \"DEPLOYMENT=DEVELOPMENT ts-node-dev --inspect=127.0.0.1:9229 src/index.ts\"",
     "start": "node dist/index.js",
     "test": "jest --config package.json",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "coverage": "npm run test -- --coverage",
-    "tsoa": "tsoa swagger && tsoa routes"
+    "tsoa": "tsoa swagger && tsoa routes",
+    "tsoa:watch": "run-when-changed --watch \"./src/controllers/**/*.ts\" --exec \"npm run tsoa\" -d 2000 -i 2000"
   },
   "dependencies": {
     "api-error-handler": "^1.0.0",
-    "body-parser": "~1.13.2",
-    "concurrently": "^3.5.0",
+    "body-parser": "^1.19.0",
+    "concurrently": "^4.1.1",
     "cookie-parser": "~1.3.5",
     "cors": "^2.8.4",
-    "debug": "~2.2.0",
+    "debug": "^4.1.1",
     "express": "^4.16.3",
     "express-ping": "^1.4.0",
     "glob": "^5.0.14",
-    "morgan": "^1.9.0",
-    "nodemon": "^1.17.4",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.1",
     "source-map-support": "^0.5.6",
-    "tsoa": "^2.1.8",
-    "typescript": "^2.8.3",
+    "tsoa": "^2.4.3",
+    "typescript": "^3.5.2",
     "uuid": "^3.2.1",
     "verror": "^1.10.0",
-    "winston": "^3.0.0"
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@types/api-error-handler": "^1.0.31",
@@ -43,18 +45,19 @@
     "@types/node": "^8.0.9",
     "@types/uuid": "^3.4.3",
     "@types/verror": "^1.10.3",
-    "jest": "^23.4.1",
+    "jest": "^24.8.0",
     "jest-express": "^1.6.0",
     "rimraf": "^2.6.2",
     "run-when-changed": "^2.1.0",
-    "ts-jest": "^23.0.1",
+    "ts-jest": "^24.0.2",
+    "ts-node-dev": "^1.0.0-pre.40",
     "tslint": "^5.10.0"
   },
   "jest": {
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
